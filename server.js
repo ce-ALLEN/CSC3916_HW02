@@ -23,8 +23,9 @@ app.use(passport.initialize());
 
 var router = express.Router();
 
-function getJSONObjectForMovieRequirement(req) {
+function getJSONObjectForMovieRequirement(req, msg) {
     var json = {
+        message: msg,
         headers: "No headers",
         key: process.env.UNIQUE_KEY,
         body: "No body"
@@ -79,8 +80,7 @@ router.route('/movies')
         if (req.get('Content-Type')) {
             res = res.type(req.get('Content-Type'));
         }
-        var o = getJSONObjectForMovieRequirement(req);
-        res.message('GET movies');
+        var o = getJSONObjectForMovieRequirement(req, 'GET movies');
         res.json(o)
     })
     .delete(authController.isAuthenticated, function(req, res) {
