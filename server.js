@@ -80,8 +80,8 @@ router.route('/movies')
             res = res.type(req.get('Content-Type'));
         }
         var o = getJSONObjectForMovieRequirement(req);
-        res.send( {message: 'GET movies'} )
-        res.json(o)
+        res.send( {message: 'GET movies', o} )
+        // res.json(o)
     })
     .delete(authController.isAuthenticated, function(req, res) {
         console.log(req.body);
